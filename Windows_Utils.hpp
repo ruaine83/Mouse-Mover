@@ -3,12 +3,14 @@
 
 // Need this so that rand_s() works
 #define _CRT_RAND_S
+
 #define random_pct(x) (x / UINT_MAX)
 
-#include <wtypes.h>
-#include <WinUser.h>
-#include <random>
 #include <cstdlib>
+#include <random>
+#include <windows.h>
+#include <wtypes.h>
+#include <time.h>
 
 using namespace std;
 
@@ -28,39 +30,21 @@ namespace Utils {
         vertical = desktop.bottom;
     }
 
-    POINT MoveCursorSmallRandom(POINT current_pos, float max_diff_pct = 0.3) {
-        int screen_x, screen_y, sign;
-
-        unsigned int base, pos_neg;
-
+    POINT MoveCursorSmallRandom(POINT current_pos) {
+        int screen_x, screen_y;
         POINT new_pos;
 
         GetDesktopResolution(screen_y, screen_x);
+        std::srand((unsigned int)time(NULL));
 
-        
-        if(!rand_s(&base))
-        {
-            printf_s("The rand_s function failed for getting base!\n");            
-        }
 
-            double movement_pct = min(max_diff_pct, random_pct(base));
+        new_pos.x = (LONG)((double)(std::rand() % 1000) / 1000.0) * screen_x;
+        new_pos.y = (LONG)((double)(std::rand() % 1000) / 1000.0) * screen_y;
 
-            // Get new x position
-            if (!rand_s(&pos_neg))
-            {
-                printf_s("The rand_s function failed for pos/neg!\n");                
-            }
-            sign = (random_pct(pos_neg) >= 0.5) ? -1 : 1; // Determines positive or negative motion
-            new_pos.x = sign * (current_pos.x * movement_pct);
-
-            // Get new y position 
-            if (!rand_s(&pos_neg))
-            {
-                printf_s("The rand_s function failed for pos/neg!\n");                
-            }
-            sign = (random_pct(pos_neg) >= 0.5) ? -1 : 1;  // Determines positive or negative motion
-            new_pos.y = sign * (current_pos.y * movement_pct);
+        return new_pos;
     }
+
+    
 }
 
 #endif
