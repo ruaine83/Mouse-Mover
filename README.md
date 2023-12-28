@@ -8,14 +8,8 @@ I'm actually kinda proud of this. I banged it out in about 2 hours, not includin
 
 ## Install/Run Instructions
 
-1. Copy the .exe file from the `Release Files` to your computer.
+1. Copy the .exe file from the `Releases` section at the right (current version 1.0.0) to your computer.
 2. Run the file. NOTE: If Windows gripes about it being _dangerous_ or something, don't worry, there's nothing malicious about this.
-
-__OR__ (if for some reason Windows doesn't want to download the .exe directly)
-
-1. Copy the .zip file to your computer
-2. Right-Click on it and extract the files
-3. Run the program
 
 ## Notes
 * The program will run in a blank command window. You can just minimize it while it's running, and can close it at any time whenever you don't want your mouse to be moved automatically.
